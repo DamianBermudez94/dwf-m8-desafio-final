@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "target": "ES5",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "jsx": "react",
+        // directorio de salida
+        "outDir": "dist"
+    },
+    // archivo de entrada o los archivos que queremos complilar
+    "include": ["src/**/*.tsx"]
+}

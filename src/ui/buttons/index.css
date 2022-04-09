@@ -1,0 +1,11 @@
+.root{
+    width: 100%;
+    padding: 10px;
+    background-color: #052405;
+    color: rgba(58, 187, 7, 0.719);
+    font-size: 16px;
+    max-width: 110px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+}

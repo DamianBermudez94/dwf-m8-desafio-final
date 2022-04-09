@@ -1,0 +1,9 @@
+.root{
+   
+    padding: 10px;
+    background-color: #052405;
+    font-size: 16px;
+    color: rgba(58, 187, 7, 0.719);
+    border-radius: 5px;
+    text-align: center; 
+}
