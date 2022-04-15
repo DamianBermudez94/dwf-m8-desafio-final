@@ -1,4 +1,6 @@
 const BASE_URL_API = "https://desafio-final-mod-8.herokuapp.com";
+console.log(BASE_URL_API);
+
 //const BASE_URL_API = "http://localhost:8080";
 
 export async function getPetsAroundMe(geoloc) {
