@@ -1,24 +1,29 @@
 import React from "react";
-import {Routes,Route} from "react-router-dom";
-import { Layuot} from "components/layout";
-import { Home } from "pages/Home";
-import { Page2} from "pages/Page2"
-import { Page3 } from "pages/Page3";
-import { Page4 } from "pages/Page4";
-import { SearchResults } from "pages/SearchResults";
+import { Routes, Route } from "react-router-dom";
+import { MyData } from "../pages/MyData/MyData";
+import { Layout } from "../components/layout/Layout";
+import { Home } from "../pages/Home/Home";
+import { Login } from "../pages/Login/Login";
+import { Pass } from "../pages/Password/Password";
+import { MyPets } from "../pages/MyPets/MyPets";
+import { PetData } from "../pages/PetData/PetData";
+import { Report } from "../pages/Report/Report";
+import { EditPet } from "../pages/EditPet/EditPet";
 
-function AppRoutes(){
-    return(
-        <Routes>
-            <Route path="/" element={<Layuot></Layuot>}>
-                <Route index element={<Home></Home>}></Route>
-                <Route path="/search/:query" element={<SearchResults></SearchResults>}></Route>
-                <Route path="page2" element={<Page2></Page2>}></Route>
-                <Route path="page3" element={<Page3></Page3>}></Route>
-                <Route path="page4" element={<Page4></Page4>}></Route>
-            </Route>
-            
-        </Routes>
-    )
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/login/:email' element={<Pass />} />
+
+        <Route path='my-data' element={<MyData />} />
+        <Route path='my-pets' element={<MyPets />} />
+        <Route path='pet-data' element={<PetData />} />
+        <Route path='pet-data/:id' element={<EditPet />} />
+        <Route path='report' element={<Report />} />
+      </Route>
+    </Routes>
+  );
 }
-export{AppRoutes}

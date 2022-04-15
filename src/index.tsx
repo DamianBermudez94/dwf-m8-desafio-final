@@ -1,17 +1,20 @@
-import * as React from "react";
+import React from "react";
 import * as ReactDOM from "react-dom";
-import {AppRoutes} from "./router";
-import {BrowserRouter} from "react-router-dom";
-import {RecoilRoot} from "recoil"
+import { BrowserRouter } from "react-router-dom";
+import { AppRoutes } from "./router";
+import { RecoilRoot } from "recoil";
+import { Suspense } from "react";
+import { Loader } from "./ui/Loader/Loader";
+import "./style.css";
 
 ReactDOM.render(
-  <RecoilRoot>
-      <React.Suspense fallback={null}>
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
-      </React.Suspense>
+  <Suspense fallback={<Loader />}>
+    <RecoilRoot>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </RecoilRoot>
-  ,document.getElementById("hello-example")
+  </Suspense>,
+  document.querySelector(".root")
 );
 

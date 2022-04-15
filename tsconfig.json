@@ -6,8 +6,10 @@
         "esModuleInterop": true,
         "jsx": "react",
         // directorio de salida
-        "outDir": "dist"
+        "outDir": "dist",
+        "allowSyntheticDefaultImports": true,
+        "removeComments": true,
     },
     // archivo de entrada o los archivos que queremos complilar
-    "include": ["src/**/*.tsx"]
+    "include": ["src/**/*.*"]
 }
