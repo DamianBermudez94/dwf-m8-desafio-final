@@ -1,29 +1,28 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { MyData } from "../pages/MyData/MyData";
-import { Layout } from "../components/layout/Layout";
-import { Home } from "../pages/Home/Home";
-import { Login } from "../pages/Login/Login";
-import { Pass } from "../pages/Password/Password";
-import { MyPets } from "../pages/MyPets/MyPets";
-import { PetData } from "../pages/PetData/PetData";
-import { Report } from "../pages/Report/Report";
-import { EditPet } from "../pages/EditPet/EditPet";
+import { Layout } from "components/layout/Layout";
+import { HomePage } from "pages/home/Home";
+import { VerifyEmailPage } from "pages/verifi-email/verifi-mail";
+import { LoginPage } from "pages/login/Login";
+import { MyDataPage } from "pages/MyData/MyData"
+import { ReportInfoPage } from "pages/report-info/report-info";
+import { MyPetsPage } from "pages/MyPets/MyPets";
+import { EditPetPage } from "pages/EditPet/EditPet";
+import { ReportPetPage } from "pages/PetData/PetData";
 
 export function AppRoutes() {
-  return (
-    <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/login/:email' element={<Pass />} />
-
-        <Route path='my-data' element={<MyData />} />
-        <Route path='my-pets' element={<MyPets />} />
-        <Route path='pet-data' element={<PetData />} />
-        <Route path='pet-data/:id' element={<EditPet />} />
-        <Route path='report' element={<Report />} />
-      </Route>
-    </Routes>
-  );
+   return (
+      <Routes>
+         <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/verify-email" element={<VerifyEmailPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/my-data" element={<MyDataPage />} />
+            <Route path="/report-info" element={<ReportInfoPage />} />
+            <Route path="/my-pets" element={<MyPetsPage />} />
+            <Route path="/edit-pet" element={<EditPetPage />} />
+            <Route path="/report-pet" element={<ReportPetPage />} />
+         </Route>
+      </Routes>
+   );
 }

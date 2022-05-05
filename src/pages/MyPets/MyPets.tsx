@@ -1,55 +1,12 @@
-import * as _ from "lodash";
-import { Text } from "../../ui/Text/Text";
-import React, { useEffect, useState } from "react";
-import { PetCard } from "../../components/PetCard/PetCard";
-import { useValueToken } from "../../hooks/hook";
-import { getMyPets } from "../../lib/api";
-import { useNavigate } from "react-router-dom";
-import css from "./MyPets.css";
+import React from "react";
+import { MyPetsComp } from "components/my-pets/my-pets";
+import { Title } from "ui/title/Title";
 
-export function MyPets() {
-  const token = useValueToken();
-  const [pets, setPets] = useState([]);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (token) {
-      getMyPets(token).then((myPets) => {
-        // console.log(myPets);
-        setPets(myPets.myPets);
-      });
-    } else {
-      navigate("/login");
-    }
-  }, []);
-
-  const handlePetCardClick = (e) => {
-    const { id } = e;
-    navigate("/pet-data/" + id.toString());
-  };
-  return (
-    <div>
-      <Text type='title' style='bold'>
-        Mis mascotas reportadas
-      </Text>
-      <div className={css.petsContainer}>
-        {pets ? (
-          _.map(pets, (pet) => {
-            return (
-              <PetCard
-                img={pet.imgURL}
-                petId={pet.id}
-                handlePetCardClick={handlePetCardClick}>
-                {pet.name}
-              </PetCard>
-            );
-          })
-        ) : (
-          <Text type='body' style='regular'>
-            AUN NO REPORTASTE MASCOTAS PERDIDAS
-          </Text>
-        )}
-      </div>
-    </div>
-  );
+export function MyPetsPage() {
+   return (
+      <section>
+         <Title>Mis mascotas reportadas</Title>
+         <MyPetsComp />
+      </section>
+   );
 }

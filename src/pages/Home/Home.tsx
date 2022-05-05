@@ -1,68 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { Text } from "../../ui/Text/Text";
-import { Button } from "../../ui/buttons/buttons";
-import { PetCard } from "../../components/PetCard/PetCard";
-import { getPetsAroundMe } from "../../lib/api";
-import * as _ from "lodash";
-import css from "./Home.css";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { ShowPetsArround } from "components/pets-arround/pet-arround";
+import { useTokenValue, useGetMyPets } from "hooks/atom";
+import { getUserPets } from "lib/api";
+import { Title } from "ui/title/Title";
 
-export function Home() {
-  const [pets, setPets] = useState(null);
-  const [geoloc, setGeoloc] = useState(null);
-  const navigate = useNavigate();
+export function HomePage() {
+   const token = useTokenValue();
+   const [{ myPets }, setMyPets] = useGetMyPets();
 
-  const setPosition = async () => {
-    navigator.geolocation.getCurrentPosition(async (geo) => {
-      const { latitude, longitude } = geo.coords;
-      setGeoloc({ lat: latitude, lng: longitude });
-    });
-  };
+   useEffect(() => {
+      // si hay token y no hay mascotas, deberia traer "mis mascotas"
+      // para hacer un solo request y para tener precargada la data
+      if (token && !myPets[0]) {
+         getUserPets(token).then((myPets) => {
+            setMyPets({ myPets });
+         });
+      }
+   }, []);
 
-  const getPets = async () => {
-    const petsAroundResponse = await (await getPetsAroundMe(geoloc)).json();
-    setPets(petsAroundResponse);
-  };
-  useEffect(() => {
-    if (geoloc) {
-      getPets();
-    }
-  }, [geoloc]);
-
-  const handlePetCardClick = ({ name, id }) => {
-    navigate(`report?name=${name}&id=${id}`, { replace: true });
-  };
-
-  return pets ? (
-    <div>
-      <Text type='title' style='bold'>
-        Mascotas perdidas cerca tuyo
-      </Text>
-      <div className={css.petsContainer}>
-        {_.map(pets, (pet) => {
-          return (
-            <PetCard
-              img={pet.imgURL}
-              petId={pet.objectID}
-              handlePetCardClick={handlePetCardClick}>
-              {pet.name}
-            </PetCard>
-          );
-        })}
-      </div>
-    </div>
-  ) : (
-    <div className={css.petsContainer}>
-      <Text type='title' style='bold'>
-        Mascotas perdidas cerca tuyo
-      </Text>
-      <Text type='subtitle' style='thin'>
-        Para ver las mascotas reportadas cerca tuyo necesitamos permiso para
-        conocer tu ubicación.
-      </Text>
-      <Button type='primary' handleClick={setPosition}>
-        Dar mi ubicación
-      </Button>
-    </div>
-  );
+   return (
+      <section>
+         <Title>Mascotas perdidas cerca tuyo</Title>
+         <ShowPetsArround />
+      </section>
+   );
 }

@@ -1,15 +1,15 @@
 import React from "react";
+import css from "./index.css";
 import { Outlet } from "react-router-dom";
-import { NavBar } from "../../ui/NavBar/NavBar";
-
+import { Header } from "components/header/Header";
+import { Menu } from "components/menu/Menu";
 
 export function Layout() {
-  return (
-    <div>
-      <header>
-        <NavBar />
-      </header>
-      <Outlet />
-    </div>
-  );
+   return (
+      <div>
+         <Header />
+         <Outlet />
+         <Menu />
+      </div>
+   );
 }

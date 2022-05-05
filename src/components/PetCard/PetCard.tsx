@@ -1,27 +1,63 @@
-import * as React from "react";
-import { Text } from "../../ui/Text/Text";
-import css from "./PetCard.css";
+import React, { useState, useEffect } from "react";
+import css from "./index.css";
+import iconEdit from "assets/missingimg.png";
+import { useNavigate } from "react-router-dom";
+import { useSetPetEditData, useTokenValue } from "hooks/atom";
+import { getPetById } from "lib/api";
 
+type PetData = {
+   petid: string;
+   image: string;
+   petname: string;
+   ubication: string;
+   state: string;
+};
 
-export function PetCard({ img, petId, children, handlePetCardClick }) {
-  const handleClick = async (e) => {
-    e.preventDefault();
-    handlePetCardClick({ id: petId, name: children });
-  };
+const stateStyle: any = {
+   fontFamily: "Poppins",
+   fontWeight: "500",
+   fontSize: "16px",
+   textTransform: "uppercase",
+};
 
-  return (
-    <div className={css.card} key={petId}>
-      <img className={css.img} src={img} crossOrigin='anonymous' />
-      <div className={css.content}>
-        <Text type='subtitle' style='bold'>
-          {children}
-        </Text>
-        <a onClick={handleClick} className={css.report}>
-          <Text style='regular' type='body'>
-            REPORTAR INFORMACIÓN
-          </Text>
-        </a>
+export function PetCard(props: PetData) {
+   const { petid, image, petname, ubication, state } = props;
+   const token = useTokenValue();
+   const navigate = useNavigate();
+   const setPetEditData = useSetPetEditData();
+   const [colorState, setColorState] = useState(stateStyle);
+
+   useEffect(() => {
+      if (state == "lost") setColorState({ ...colorState, color: "#FF3A3A" });
+      if (state == "found") setColorState({ ...colorState, color: "#49a223" });
+   }, []);
+
+   const handleClick = () => {
+      getPetById(petid, token).then((pet) => {
+         setPetEditData({
+            petid,
+            lat: pet.lat,
+            lng: pet.lng,
+            petimage: pet.petimage,
+            petname: pet.petname,
+            petstate: pet.petstate,
+            ubication: pet.ubication,
+         });
+         navigate("/edit-pet");
+      });
+   };
+
+   return (
+      <div className={css.card}>
+         <img className={css["card__image"]} src={image} />
+         <div className={css["card__info-cont"]}>
+            <div className={css["card__info"]}>
+               <h2 className={css["card__name"]}>{petname}</h2>
+               <p className={css["card__ubication"]}>{ubication}</p>
+               <p style={colorState}>{state}</p>
+            </div>
+            <img className={css["card__icon"]} onClick={handleClick} src={iconEdit} />
+         </div>
       </div>
-    </div>
-  );
+   );
 }
