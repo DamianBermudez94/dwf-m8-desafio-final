@@ -1,0 +1,51 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 400px;
+   
+    margin-bottom: 20px;
+    border-radius: 15px;
+    padding: 13px 0;
+    box-shadow: 10px 5px 10px #0059ff;
+  }
+  
+  .image {
+    width: 70%;
+    height: 50%;
+  }
+  
+  .info {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .name {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 10px;
+  }
+  
+  .place {
+    font-size: 24px;
+    font-weight: 700;
+    margin:20px;
+  }
+  
+  .link {
+    text-align: center;
+    font-weight: 700;
+    color: #0059ff;
+    cursor: pointer;
+    padding: 10px;
+    transition: all .5s;
+    margin: 20px;
+  }
+
+  .link:hover{
+    border-radius: 5px;
+    background-color: #0059ff;
+    color: #fff;
+  }

@@ -1,15 +1,19 @@
 import React from "react";
-import css from "./index.css";
 import { Outlet } from "react-router-dom";
-import { Header } from "components/header/Header";
-import { Menu } from "components/menu/Menu";
+import Header from "components/header/header";
+import { menuValue } from "hooks";
+import Menu from "components/menu/menu";
 
-export function Layout() {
-   return (
+export default function Layout() {
+  const menuOpen = menuValue();
+  return !menuOpen ? (
+    <div>
+      <Header />
       <div>
-         <Header />
-         <Outlet />
-         <Menu />
+        <Outlet />
       </div>
-   );
+    </div>
+  ) : (
+    <Menu />
+  );
 }

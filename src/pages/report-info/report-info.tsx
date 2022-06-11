@@ -1,10 +1,6 @@
 import React from "react";
-import { ReportInfoComp } from "components/report-info/repor-info";
+import ReportPet from "components/pets/form-report";
 
-export function ReportInfoPage() {
-   return (
-      <section>
-         <ReportInfoComp />
-      </section>
-   );
+export default function Report() {
+  return <ReportPet />;
 }

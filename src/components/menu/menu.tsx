@@ -1,51 +1,52 @@
-import React from "react";
-import css from "./index.css";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTokenValue, useBurgerState } from "hooks/atom";
-import { CloseSesion } from "components/close-sesion/close-sesion";
+import css from "./menu.css";
+import Link from "./link";
+import { getToken } from "lib/api";
+import { logOut, menuState, useMe } from "hooks";
 
-const inactive = css.menu;
-const active = `${css.menu} ${css.active}`;
+export default function Menu() {
+  const navigate = useNavigate();
+  const setMenuOpen = menuState();
+  const [token, setToken] = useState("");
+  const { me } = useMe();
 
-export function Menu() {
-   const navigate = useNavigate();
-   const token = useTokenValue();
-   const [burgerState, setBurgerState] = useBurgerState();
+  useEffect(() => {
+    setToken(getToken());
+  }, []);
 
-   const handleClick = (e: React.ChangeEvent<any>) => {
-      setBurgerState(!burgerState);
+  const handleNavClose = () => {
+    setMenuOpen(false);
+  };
 
-      if (token) {
-         switch (e.target.id) {
-            case "MyData":
-               navigate("/my-data");
-               break;
-            case "MyPets":
-               navigate("/my-pets");
-               break;
-            case "ReportPet":
-               navigate("/report-pet");
-               break;
-         }
-      } else {
-         navigate("/verify-email");
-      }
-   };
+  const handleLogOut = () => {
+    logOut();
+    setMenuOpen(false);
+    navigate("/");
+  };
 
-   return (
-      <div className={burgerState ? active : inactive}>
-         <div className={css["menu-div-text"]}>
-            <p className={css["menu-text"]} id="MyData" onClick={handleClick}>
-               Mis datos
-            </p>
-            <p className={css["menu-text"]} id="MyPets" onClick={handleClick}>
-               Mis mascotas reportadas
-            </p>
-            <p className={css["menu-text"]} id="ReportPet" onClick={handleClick}>
-               Reportar mascota
-            </p>
-         </div>
-         <CloseSesion />
+  return (
+    <div className={css.root}>
+      <div className={css.close} onClick={handleNavClose}>
+        X
       </div>
-   );
+      <div className={css.text}>
+        <Link route="/profile/info">Mis Datos</Link>
+        <Link route="/me/pets">Mis mascotas reportadas</Link>
+        <Link route="/pets/new">Reportar mascota</Link>
+      </div>
+      <div className={css.footer}>
+        {me?.email ? (
+          <>
+            <p>{me?.email}</p>
+            <a href="#" onClick={handleLogOut}>
+              CERRAR SESIÓN
+            </a>
+          </>
+        ) : (
+          ""
+        )}
+      </div>
+    </div>
+  );
 }

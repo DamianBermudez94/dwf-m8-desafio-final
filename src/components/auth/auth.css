@@ -1,0 +1,52 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+  }
+  
+  .form {
+    margin-top: 20px;
+  }
+  
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 20px;
+  }
+  .label{
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .input {
+    height: 40px;
+    font-size: 22px;
+    border: 0;
+    border: 2px solid #0059ff;
+  }
+  
+  input[type="text"]:focus {
+    outline: none;
+  }
+  
+  .passwordForget {
+   
+    color: #40afff;
+    margin-top: 20px;
+    text-align: center;
+    transition: all .5s;
+    padding: 10px;
+  }
+  .passwordForget:hover{
+    border-radius: 5px;
+    background-color: #0059ff;
+    color: #fff;
+  }
+  
+  .response {
+    margin-top: 20px;
+    font-size: 24px;
+  }

@@ -1,13 +1,6 @@
 import React from "react";
-import { GetTokenComp } from "components/get-token/get-token";
-import { Title } from "ui/title/Title";
+import Email from "components/auth/email";
 
-export function LoginPage() {
-   return (
-      <section>
-         <Title>Login page</Title>
-
-         <GetTokenComp />
-      </section>
-   );
+export default function Login() {
+  return <Email />;
 }

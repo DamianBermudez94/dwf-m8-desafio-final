@@ -1,211 +1,165 @@
-export const API_BASE_URL = "https://dwf-m7-mod-final.herokuapp.com";
-export const emailRegex =
-   /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
-console.log(emailRegex);
-console.log(API_BASE_URL);
-export async function checkEmail(email: string): Promise<any> {
-   const res = await fetch(`${API_BASE_URL}/auth/verify-email`, {
-      method: "POST",
-      headers: {
-         "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-         email: email,
-      }),
-   });
+//const DEV_API = "http://localhost:3002";
+const DEV_API = "https://desafio-final-mod-8.herokuapp.com/";
 
-   return await res.json();
-}
-
-export async function getTokenUser(email: string, password: string) {
-   const res = await fetch(`${API_BASE_URL}/auth/token`, {
-      method: "POST",
-      headers: {
-         "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-         email,
-         password,
-      }),
-   });
-
-   const token = await res.json();
-   if (res.status === 200) {
-      return token;
-   }
-   return;
-}
-
-type dataSignUp = {
-   fullname: string;
-   email: string;
-   password: string;
+//Check if email exist
+export const checkEmail = async (email) => {
+  const res = await fetch(DEV_API + "/exist" + "?email=" + email);
+  console.log(res);
+  
+  const { find } = await res.json();
+  return find;
 };
 
-export async function singUp(data: dataSignUp) {
-   const { fullname, email, password } = data;
-   const res = await fetch(`${API_BASE_URL}/auth`, {
-      method: "POST",
-      headers: {
-         "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-         fullname,
-         email,
-         password,
-      }),
-   });
-   
-   
-   return res.json();
-}
-
-export async function getPetsAround(lat, lng) {
-   console.log(lat,lng);
-   console.log(API_BASE_URL);
-   
-   const res = await fetch(`${API_BASE_URL}/pets/around?lat=${lat}&lng=${lng}`, {
-      method: "GET",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   });
-
-   const pets = await res.json();
-   console.log(pets);
-   
-   if (res.status === 200) {
-      return pets;
-   }
-   return;
-}
-
-type dataReportInfo = {
-   petid: string;
-   fullname: string;
-   phonenumber: string;
-   report: string;
-   token: string;
+//Auth and save token in localStorage
+export const auth = async (email: string, password: string) => {
+  const request = await fetch(DEV_API + "/auth/token", {
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+  const response = await request.json();
+  if (response.token) {
+    localStorage.setItem("token", response.token);
+    return response.token;
+  }
 };
 
-export async function reportInfo(data: dataReportInfo): Promise<any> {
-   const { petid, fullname, phonenumber, report, token } = data;
-   const res = await fetch(`${API_BASE_URL}/pets/report`, {
-      method: "POST",
-      headers: {
-         "Content-Type": "application/json",
-         Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-         petid,
-         fullname,
-         phonenumber,
-         report,
-      }),
-   });
-
-   return res.json();
-}
-
-export async function getUserPets(token: string) {
-   const res = await fetch(`${API_BASE_URL}/me/pets`, {
-      method: "GET",
-      headers: {
-         "Content-Type": "application/json",
-         Authorization: `Bearer ${token}`,
-      },
-   });
-
-   return res.json();
-}
-
-export async function getPetById(petId: string, token: string) {
-   const res = await fetch(`${API_BASE_URL}/me/pets/${petId}`, {
-      method: "GET",
-      headers: {
-         "Content-Type": "application/json",
-         Authorization: `Bearer ${token}`,
-      },
-   });
-
-   return res.json();
-}
-
-type petData = {
-   petid?: string;
-   lat: string;
-   lng: string;
-   petimage: string;
-   petname: string;
-   petstate?: string;
-   ubication: string;
+//Sign Up
+export const signUp = async (
+  email: string,
+  password: string,
+  fullname: string
+) => {
+  const request = await fetch(DEV_API + "/auth", {
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+      fullname,
+    }),
+  });
+  const response = await request.json();
+  return response;
 };
 
-export async function createPet(petData, token: string) {
-   const { petname, lat, lng, ubication, petimage } = petData;
-   const res = await fetch(`${API_BASE_URL}/me/pets`, {
-      method: "POST",
-      headers: {
-         "Content-Type": "application/json",
-         Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-         lat,
-         lng,
-         petname,
-         petimage,
-         ubication,
-      }),
-   });
+//Get token from local-storage
+export const getToken = () => {
+  return localStorage.getItem("token");
+};
 
-   return res.json();
+//Get my data
+export async function getMe() {
+  const token = getToken();
+  if (token) {
+    const res = await fetch(DEV_API + "/me", {
+      method: "get",
+      headers: {
+        Authorization: token ? "bearer " + token : null,
+      },
+    });
+    return await res.json();
+  } else {
+    return null;
+  }
 }
 
-export async function editPet(petData, token: string) {
-   const { petid, lat, lng, petimage, petname, ubication } = petData;
-
-   const res = await fetch(`${API_BASE_URL}/me/pets`, {
-      method: "PUT",
+//Update my data
+export const update = async (fullname?: string, password?: string) => {
+  const token = getToken();
+  if (token) {
+    await fetch(DEV_API + "/me", {
+      method: "put",
       headers: {
-         "Content-Type": "application/json",
-         Authorization: `Bearer ${token}`,
+        "content-type": "application/json",
+        Authorization: token ? "bearer " + token : null,
       },
       body: JSON.stringify({
-         petid,
-         lat,
-         lng,
-         petname,
-         petimage,
-         ubication,
+        password,
+        fullname: fullname,
       }),
-   });
+    });
+    return { ok: true };
+  } else {
+    return null;
+  }
+};
 
-   return res.json();
-}
+//Get pets around me
+export const getPets = async (coord) => {
+  const { latitude, longitude } = coord;
+  const allPets = await fetch(
+    `${DEV_API}/pets?lat=${latitude}&lng=${longitude}`
+  );
+  return allPets.json();
+};
 
-export async function updateStatePet(petid: string, token: string) {
-   return await fetch(`${API_BASE_URL}/me/pets/state`, {
-      method: "PUT",
-      headers: {
-         "Content-Type": "application/json",
-         Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-         petid,
-         petstate: "found",
-      }),
-   });
-}
+//Report pet missed around me
+export const newReport = async (data) => {
+  const newReport = await fetch(DEV_API + "/pets/report", {
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return newReport.json();
+};
 
-export async function deletePet(petid: string, token: string) {
-   return await fetch(`${API_BASE_URL}/me/pets`, {
-      method: "DELETE",
-      headers: {
-         "Content-Type": "application/json",
-         Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-         petid,
-      }),
-   });
-}
+//Get coord by place
+export const getCoord = async (query) => {
+  const data = await fetch(
+    `https://us1.locationiq.com/v1/search.php?key=pk.bf4604bc2b3ea328e732de26a4387fa9&q=${query}&format=json`
+  ).then((r) => r.json());
+
+  const lat = parseFloat(data[0].lat);
+  const lon = parseFloat(data[0].lon);
+  return { lat, lon };
+};
+
+//Create new missed pet
+export const createPet = async (petData) => {
+  const token = getToken();
+  const newPet = await fetch(DEV_API + "/pets", {
+    method: "post",
+    headers: {
+      "content-type": "application/json",
+      Authorization: token ? "bearer " + token : null,
+    },
+    body: JSON.stringify(petData),
+  });
+  return newPet.json();
+};
+
+//Update my missed pet
+export const updatePet = async (petData) => {
+  const token = getToken();
+  const petUpdate = await fetch(DEV_API + "/pets/" + petData.id, {
+    method: "put",
+    headers: {
+      "content-type": "application/json",
+      Authorization: token ? "bearer " + token : null,
+    },
+    body: JSON.stringify(petData),
+  });
+  return petUpdate.json();
+};
+
+//Get my missed pets
+export const getMyPets = async () => {
+  const token = getToken();
+  const myPets = await fetch(DEV_API + "/me/pets", {
+    method: "get",
+    headers: {
+      Authorization: token ? "bearer " + token : null,
+    },
+  });
+  return await myPets.json();
+};

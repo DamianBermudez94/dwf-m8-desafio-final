@@ -1,4 +1,6 @@
 dist
 node_modules
-package-lock.json
-n
+.parcel-cache
+index.js
+db.js
+.env
