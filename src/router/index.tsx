@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import App from "pages/Home/Home";
 import Report from "pages/report-info/report-info";
-import Login from "pages/login/Login";
+import Login from "pages/login/login";
 import Password from "components/auth/password";
 import ProfileEdit from "pages/profile-edit/profile-edit";
 import NewPetPage from "pages/pet-data/PetData";
