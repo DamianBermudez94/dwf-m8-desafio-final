@@ -1,5 +1,5 @@
 import React from "react";
-import css from "./text.css";
+import css from "./index.css";
 
 export const InputText = ({
   label,
