@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import css from "./index.css";
 import { Title, Text } from "ui/typography/title";
 import { PrimaryButton } from "ui/buttons/buttons";
-import { InputText, InputPassword } from "ui/Text/text";
+import { InputText, InputPassword } from "ui/Text/Text";
 import { useMe, useUserEmail, routeValue } from "hooks";
 import { getToken, signUp, auth, update } from "lib/api";
 import { useNavigate } from "react-router-dom";

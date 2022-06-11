@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import css from "./form-new.css";
 import { Title } from "ui/typography/title";
-import { InputText } from "ui/Text/text";
+import { InputText } from "ui/Text/Text";
 import UploadImage from "./upload-image";
 import { PrimaryButton } from "ui/buttons/buttons";
 import MapboxSearch from "components/map-search/map-search";

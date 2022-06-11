@@ -2,7 +2,7 @@ import React from "react";
 import css from "./form.css";
 import { Title } from "ui/typography/title";
 import { PrimaryButton } from "ui/buttons/buttons";
-import { InputText, Textarea } from "ui/Text/text";
+import { InputText, Textarea } from "ui/Text/Text";
 import { reportState, reportValue } from "hooks";
 import { newReport } from "lib/api";
 

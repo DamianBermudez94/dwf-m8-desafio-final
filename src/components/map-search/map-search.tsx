@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { InputMap } from "ui/Text/text";
+import { InputMap } from "ui/Text/Text";
 import { SecondaryButton } from "ui/buttons/buttons";
 import { TextMap } from "ui/typography/title";
 import { getCoord } from "lib/api";
