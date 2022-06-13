@@ -15,7 +15,8 @@ import {
   export const lastGeoValue = () => useRecoilValue(lastGeoState);
   export const useLastGeo = () => {
     const positionLocalStorage = localStorage.getItem("position");
-    console.log("Hola!!!!",positionLocalStorage);
+    
+    
     
     return JSON.parse(positionLocalStorage);
   };

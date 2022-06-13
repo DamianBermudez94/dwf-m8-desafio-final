@@ -21,7 +21,7 @@ export default function Home() {
         <Location />
       ) : pets?.length > 0 ? (
         pets.map((pet, index) => {
-          console.log("Holi!!",pets);
+          
           
           return <CardPet pet={pet} key={index} />;
         })

@@ -10,7 +10,7 @@ const Map = ReactMapboxGl({
   accessToken:
     "pk.eyJ1IjoiZGFtaS1iZXJtdWRleiIsImEiOiJjbDQ3amp2bzkwaXlpM2Juc3cwZmxmZHFwIn0.oz8Ctgl27qUg-esOOasvjQ",
 });
-console.log("soy el maxBox",Map);
+
 
 type MapBoxSearchProps = {
   onChange?: (any) => any;
