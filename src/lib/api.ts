@@ -1,5 +1,5 @@
 //const DEV_API = "http://localhost:3002";
-const DEV_API = "https://desafio-final-mod-8.herokuapp.com/";
+const DEV_API = "https://desafio-final-mod-8.herokuapp.com";
 
 //Check if email exist
 export const checkEmail = async (email) => {
