@@ -12,7 +12,7 @@ export default function Icon() {
   return (
     <img
       className={css.icon}
-      src="https://res.cloudinary.com/sofa/image/upload/v1651106901/src/icon_kh7rwn.png"
+      src="https://res.cloudinary.com/dwf-m7/image/upload/v1656107515/icon_h9c2tz.png"
       onClick={handleClick}
     />
   );

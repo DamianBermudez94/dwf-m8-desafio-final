@@ -3,51 +3,61 @@
   font-weight: 700;
 }
 .item {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  
    
-  }
+}
   
-  .text {
-    height: 50px;
-    font-size: 24px;
-    border: 2px solid #0059ff;
-    
-  }
+.text {
+  height: 50px;
+  font-size: 24px;
+  border: 2px solid #0059ff;
+  width: 335px;
   
-  .textarea {
-    height: 120px;
-    font-size: 24px;
-    border: 2px solid #0059ff;
-  }
   
-  input[type="text"]:focus {
-    outline: none;
-  }
+}
+.label{
+  width: 93%;
+  font-size: 18px;
+  text-align: left;
+  padding: 5px;
+}
+.textarea {
+  height: 120px;
+  font-size: 24px;
+  border: 2px solid #0059ff;
+}
   
-  textarea:focus {
-    outline: none;
-  }
+input[type="text"]:focus {
+  outline: none;
+}
   
-  .password {
-    height: 40px;
-    margin-bottom: 10px;
-    font-size: 22px;
-    border: 2px solid #0059ff;
+textarea:focus {
+  outline: none;
+}
+  
+.password {
+  height: 40px;
+  margin-bottom: 10px;
+  font-size: 22px;
+  border: 2px solid #0059ff;
  
-  }
+}
   
-  .verify {
-    height: 40px;
-    font-size: 22px;
-    border: 2px solid #0059ff;
+.verify {
+  height: 40px;
+  font-size: 22px;
+  border: 2px solid #0059ff;
  
-  }
+}
   
-  .itemPassword {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    margin: 50px 0 20px 0;
-  }
+.itemPassword {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 50px 0 20px 0;
+}

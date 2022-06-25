@@ -53,7 +53,8 @@ export default function MapboxSearch(props: MapBoxSearchProps) {
         style="mapbox://styles/mapbox/streets-v11"
         containerStyle={{
           height: "300px",
-          width: "500px",
+          width: "300px",
+          margin:"auto"
         }}
         zoom={[15]}
         center={coords}

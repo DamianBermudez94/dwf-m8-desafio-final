@@ -7,7 +7,7 @@ import { usePhoto } from "hooks";
 export default function UploadImage({ petImage = null }) {
   const [photo, setPhoto] = usePhoto();
   const imgPlaceholder =
-    "https://res.cloudinary.com/sofa/image/upload/v1634824487/src/placeholder_dos8lj.png";
+    "https://res.cloudinary.com/dwf-m7/image/upload/v1656107359/missingimg_mc3rsv.png";
   const [getRootProps, getInputProps] = dropzoneFileManager();
   const image = photo?.preview
     ? photo.preview

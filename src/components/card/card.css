@@ -3,21 +3,22 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
+    min-width: 330px;
     height: 400px;
-   
     margin-bottom: 20px;
     border-radius: 15px;
     padding: 13px 0;
-    box-shadow: 10px 5px 10px #0059ff;
+    box-shadow: 8px 5px 10px 3px #0059ff;
+    background-color: rgb( 240, 243, 244 );
   }
   
   .image {
-    width: 70%;
+    width: 80%;
     height: 50%;
   }
   
   .info {
+    width: 100%;
     text-align: center;
     padding: 10px;
   }
@@ -30,8 +31,8 @@
   
   .place {
     font-size: 24px;
-    font-weight: 700;
-    margin:20px;
+    
+    margin:10px;
   }
   
   .link {

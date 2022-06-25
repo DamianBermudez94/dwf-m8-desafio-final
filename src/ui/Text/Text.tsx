@@ -10,7 +10,7 @@ export const InputText = ({
 }) => {
   return (
     <div className={css.item}>
-      <label>{label}</label>
+      <label className={css.label}>{label}</label>
       <input
         type="text"
         name={name}
@@ -66,7 +66,7 @@ export const InputMap = ({
 }) => {
   return (
     <div className={css.item} style={{ marginTop: "80px" }}>
-      <label>UBICACIÓN</label>
+      <label className={css.label}>UBICACIÓN</label>
       <input
         type="text"
         onChange={onChange}
