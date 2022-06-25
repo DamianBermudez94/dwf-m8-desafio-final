@@ -47,7 +47,7 @@ export default function FormNewPet() {
     <div className={css.root}>
       <Title>Reportar Mascota perdida</Title>
       <form className={css.form} onSubmit={submitHandler}>
-        <InputText label="NOMBRE" name="name" required />
+        <InputText label="NOMBRE" name="name"/>
         <UploadImage />
         <MapboxSearch onChange={handleMapboxChange} />
         <div className={css.containerButton}>

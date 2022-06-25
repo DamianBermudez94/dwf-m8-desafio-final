@@ -8,6 +8,8 @@ export const InputText = ({
   defaultValue = "",
   placeholder = "",
 }) => {
+  console.log("soy el",placeholder);
+  
   return (
     <div className={css.item}>
       <label className={css.label}>{label}</label>
@@ -15,6 +17,33 @@ export const InputText = ({
         type="text"
         name={name}
         className={css.text}
+        required={required}
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+      />
+    </div>
+  );
+  
+  
+};
+
+
+export const Email = ({
+  label,
+  name,
+  required = false,
+  defaultValue = "",
+  placeholder = "",
+}) => {
+  console.log("soy el email",placeholder);
+  
+  return (
+    <div className={css.item}>
+      <label className={css.label}>{label}</label>
+      <input
+        type="email"
+        name={name}
+        className={css.email}
         required={required}
         defaultValue={defaultValue}
         placeholder={placeholder}

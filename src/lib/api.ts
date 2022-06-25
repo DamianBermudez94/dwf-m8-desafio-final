@@ -83,7 +83,7 @@ export const update = async (fullname?: string, password?: string) => {
       },
       body: JSON.stringify({
         password,
-        fullname: fullname,
+        fullname,
       }),
     });
     return { ok: true };

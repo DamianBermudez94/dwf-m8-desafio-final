@@ -26,8 +26,8 @@ export default function FormReportPet() {
     <div className={css.root}>
       <Title>Reportar info de {reportData.petName}</Title>
       <form className={css.form} onSubmit={handleSubmit}>
-        <InputText label="TU NOMBRE" name="name" required />
-        <InputText label="TU TELEFONO" name="phone" required />
+        <InputText label="TU NOMBRE" name="name"/>
+        <InputText label="TU TELEFONO" name="phone"/>
         <Textarea label="DONDE LO VISTE?" name="description" required />
         <PrimaryButton type="submit">Enviar</PrimaryButton>
       </form>
